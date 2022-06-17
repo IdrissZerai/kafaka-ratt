@@ -18,7 +18,6 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Service
 public class TopicProducer {
 
-    @Value("${topic.name.producer}")
     private String topicName;
 
     @Autowired
@@ -27,6 +26,7 @@ public class TopicProducer {
     @Transactional("kafkaTransactionManager")
     public void send(EventOp eventOp) throws JsonProcessingException {
         log.info("Payload sent: {}", eventOp);
+        topicName = "topic.status."+eventOp.getStatus();
         kafkaTemplate.send(topicName, JsonMapper.writeToJson(eventOp));
     }
 }

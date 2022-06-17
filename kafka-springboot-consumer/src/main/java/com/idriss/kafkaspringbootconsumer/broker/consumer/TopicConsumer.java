@@ -13,7 +13,7 @@ import java.io.IOException;
 @Service
 public class TopicConsumer {
 
-    @KafkaListener(topics = "topic.comand.test", groupId = "group_id")
+    @KafkaListener(topics = "topic.status.valid", groupId = "group_id")
     public void listenGroupFoo(String message) throws IOException {
         System.out.println("Received Message in group group_id: " + message);
         EventOp eventOp = JsonMapper.readFromJson(message, EventOp.class);
